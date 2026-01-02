@@ -99,6 +99,8 @@ public:
 
 		virtual bool has_joy_motion_sensors() const { return false; }
 		virtual void set_joy_motion_sensors_enabled(bool p_enable) {}
+		virtual bool has_joy_adaptive_triggers() const { return false; }
+		virtual bool send_joy_packet(const void *p_data, int p_size) { return false; }
 	};
 
 	static constexpr int32_t JOYPADS_MAX = 16;
@@ -434,6 +436,17 @@ public:
 
 	void set_ignore_joypad_on_unfocused_application(bool p_ignore);
 	bool is_ignoring_joypad_on_unfocused_application() const;
+
+	bool has_joy_adaptive_triggers(int p_device) const;
+	bool joy_adaptive_triggers_off(int p_device, JoyAxis p_axis);
+	bool joy_adaptive_triggers_feedback(int p_device, JoyAxis p_axis, int p_position, int p_strength);
+	bool joy_adaptive_triggers_weapon(int p_device, JoyAxis p_axis, int p_start_position, int p_end_position, int p_strength);
+	bool joy_adaptive_triggers_vibration(int p_device, JoyAxis p_axis, int p_position, int p_frequency, int p_amplitude);
+	bool joy_adaptive_triggers_multi_feedback(int p_device, JoyAxis p_axis, const PackedInt32Array &p_strengths);
+	bool joy_adaptive_triggers_slope_feedback(int p_device, JoyAxis p_axis, int p_start_position, int p_end_position, int p_start_strength, int p_end_strength);
+	bool joy_adaptive_triggers_multi_vibration(int p_device, JoyAxis p_axis, int p_frequency, const PackedInt32Array &p_amplitudes);
+
+	bool send_joy_packet(int p_device, const PackedByteArray &p_packet);
 
 	void set_mouse_position(const Point2 &p_posf);
 

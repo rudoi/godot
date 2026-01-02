@@ -62,6 +62,8 @@ private:
 		virtual void set_joy_motion_sensors_enabled(bool p_enable) override;
 
 		virtual bool has_joy_vibration() const override;
+		virtual bool has_joy_adaptive_triggers() const override;
+		virtual bool send_joy_packet(const void *p_data, int p_size) override;
 
 		SDL_Joystick *get_sdl_joystick() const;
 		SDL_Gamepad *get_sdl_gamepad() const;
